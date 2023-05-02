@@ -29,7 +29,7 @@ def lasso(data):
         return alpha * np.sign(theta)
 
     # 进行梯度下降迭代
-    for i in range(10):
+    for i in range(1000):
         # 计算模型预测值
         y_pred = X @ theta
 

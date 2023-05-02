@@ -19,7 +19,10 @@ def ridge(data):
 def lasso(data):
     X,y=read_data()
     alpha = 0.1
-    learning_rate = 0.003
+    learning_rate = 0.001
+    
+    #归一化
+    X=(X - np.mean(X, axis=0)) / np.std(X, axis=0)
 
     # 初始化模型参数
     theta = np.zeros(6)

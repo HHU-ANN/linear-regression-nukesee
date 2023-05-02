@@ -9,6 +9,7 @@ except ImportError as e:
     import numpy as np
 
 def ridge(data):
+    X,y=read_data()
     alpha=0.1
     I = np.eye(6)
     beta = np.linalg.inv(X.T @ X + alpha * I) @ X.T @ y
@@ -16,6 +17,7 @@ def ridge(data):
     
     
 def lasso(data):
+    X,y=read_data()
     alpha = 0.1
     learning_rate = 0.001
 

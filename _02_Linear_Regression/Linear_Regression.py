@@ -9,14 +9,14 @@ except ImportError as e:
     import numpy as np
 
 def ridge(data):
-    alpha=0.2
+    alpha=0.1
     I = np.eye(6)
     beta = np.linalg.inv(X.T @ X + alpha * I) @ X.T @ y
-    return beta@data
+    return data @ beta
     
     
 def lasso(data):
-    alpha = 0.2
+    alpha = 0.1
     learning_rate = 0.001
 
     # 初始化模型参数
@@ -37,7 +37,7 @@ def lasso(data):
         # 计算梯度并更新模型参数
         grad = (X.T @ (y_pred - y)) / len(y) + l1_grad(theta, alpha)
         theta = theta - learning_rate * grad
-    return data@theta
+    return data @ theta
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')

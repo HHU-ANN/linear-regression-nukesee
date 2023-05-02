@@ -18,8 +18,8 @@ def ridge(data):
     
 def lasso(data):
     X,y=read_data()
-    alpha = 0.1
-    learning_rate = 0.006
+    alpha = 0.75
+    learning_rate = 0.001
     
     #归一化
     X=(X - np.mean(X, axis=0)) / np.std(X, axis=0)
@@ -32,7 +32,7 @@ def lasso(data):
         return alpha * np.sign(theta)
 
     # 进行梯度下降迭代
-    for i in range(1000):
+    for i in range(800):
         # 计算模型预测值
         y_pred = X @ theta
 

@@ -19,7 +19,7 @@ def ridge(data):
 def lasso(data):
     X,y=read_data()
     alpha = 0.1
-    learning_rate = 0.001
+    learning_rate = 0.003
 
     # 初始化模型参数
     theta = np.zeros(6)
@@ -29,7 +29,7 @@ def lasso(data):
         return alpha * np.sign(theta)
 
     # 进行梯度下降迭代
-    for i in range(1000):
+    for i in range(1):
         # 计算模型预测值
         y_pred = X @ theta
 

@@ -11,24 +11,39 @@ except ImportError as e:
 def ridge(data):
     alpha=0.1
     I = np.eye(6)
-    
     return np.linalg.inv(X.T @ X + alpha * I) @ X.T @ y
     
     
 def lasso(data):
-    pass
+    alpha = 0.1
+    learning_rate = 0.001
+
+    # 初始化模型参数
+    theta = np.zeros(6)
+
+    # 定义L1正则化项的梯度
+    def l1_grad(theta, alpha):
+    return alpha * np.sign(theta)
+
+    # 进行梯度下降迭代
+    for i in range(100):
+        # 计算模型预测值
+        y_pred = X @ theta
+
+        # 计算损失函数和L1正则化项
+        loss = np.mean((y_pred - y)**2) + alpha * np.sum(np.abs(theta))
+
+        # 计算梯度并更新模型参数
+        grad = (X.T @ (y_pred - y)) / len(y) + l1_grad(theta, alpha)
+        theta = theta - learning_rate * grad
+    return theta
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')
     y = np.load(path + 'y_train.npy')
     return x, y
 
-def main(data):
-    x,y=read_data()
-    weight=ridge(x,y)
-    return data @ weight
 
 
-def model(x,y):
-    return np.dot(np.linalg.inv(np.dot(x.T,x)),np.dot(x.T,y))
+
 

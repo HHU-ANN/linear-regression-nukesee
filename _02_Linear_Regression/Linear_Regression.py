@@ -10,7 +10,7 @@ except ImportError as e:
 
 def ridge(data):
     X,y=read_data()
-    alpha=0.1
+    alpha=0.11
     I = np.eye(6)
     beta = np.linalg.inv(X.T @ X + alpha * I) @ X.T @ y
     return data @ beta
@@ -29,7 +29,7 @@ def lasso(data):
         return alpha * np.sign(theta)
 
     # 进行梯度下降迭代
-    for i in range(30):
+    for i in range(10):
         # 计算模型预测值
         y_pred = X @ theta
 

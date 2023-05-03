@@ -10,7 +10,6 @@ except ImportError as e:
 
 def ridge(data):
     X,y=read_data()
-    X=(X - np.mean(X, axis=0)) / np.std(X, axis=0)
     alpha=0.11
     I = np.eye(6)
     beta = np.linalg.inv(X.T @ X + alpha * I) @ X.T @ y
@@ -18,12 +17,15 @@ def ridge(data):
     
     
 def lasso(data):
+    
     X,y=read_data()
     alpha = 0.75
     learning_rate = 0.001
     
-    #归一化
-    X=(X - np.mean(X, axis=0)) / np.std(X, axis=0)
+    # 对数据进行归一化
+    max_vals = np.max(X, axis=0)
+    min_vals = np.min(X, axis=0)
+    X = (X - min_vals) / (max_vals - min_vals)
 
     # 初始化模型参数
     theta = np.zeros(6)

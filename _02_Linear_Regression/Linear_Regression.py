@@ -43,8 +43,10 @@ def lasso(data):
         loss = np.mean((y_pred - y)**2) + alpha * np.sum(np.abs(theta))
 
         # 计算梯度并更新模型参数
-        grad = (X.T @ (y_pred - y)) + l1_grad(theta, alpha)
+        grad = (np.matmul(X.T, (np.matmul(X, theta) - y))) + l1(theta,alpha)
         theta = theta - learning_rate * grad
+        if np.linalg.norm(grad)<1e-5:
+            break
     return data @ theta
 
 def read_data(path='./data/exp02/'):

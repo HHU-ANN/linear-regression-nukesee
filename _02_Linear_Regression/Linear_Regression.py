@@ -17,17 +17,20 @@ def ridge(data):
     
     
 def lasso(data):
-    
     X,y=read_data()
-    m, n = X.shape
-    weight = np.zeros(n)
-    max_iterations = 100000
-    for i in range(max_iterations):
-        grad = (np.matmul(X.T, (np.matmul(X, weight) - y))) + 1e-12 * np.sign(weight)
-        weight = weight - 1e-12 * grad
-        if np.linalg.norm(grad) < 0.0001:
+    alpha = 1e-12
+    learning_rate = 1e-12
+    theta = np.zeros(6)
+    def l1(theta, alpha):
+        return alpha * np.sign(theta)
+
+    for i in range(100000):
+        # 计算梯度并更新模型参数
+        grad = (np.matmul(X.T, (np.matmul(X, theta) - y))) + l1(theta,alpha)
+        theta = theta - learning_rate * grad
+        if np.linalg.norm(grad)<1e-5:
             break
-    return weight @ data
+    return theta @ data
 
 def read_data(path='./data/exp02/'):
     x = np.load(path + 'X_train.npy')

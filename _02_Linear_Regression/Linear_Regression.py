@@ -10,7 +10,7 @@ except ImportError as e:
 
 def ridge(data):
     X,y=read_data()
-    alpha=0.11
+    alpha=-0.1
     I = np.eye(6)
     beta = np.linalg.inv(X.T @ X + alpha * I) @ X.T @ y
     return data @ beta

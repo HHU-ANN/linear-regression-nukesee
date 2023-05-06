@@ -31,7 +31,7 @@ def lasso(data):
     theta = np.zeros(6)
 
     # 定义L1正则化项的梯度
-    def l1_grad(theta, alpha):
+    def l1(theta, alpha):
         return alpha * np.sign(theta)
 
     # 进行梯度下降迭代
